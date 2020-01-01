@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/plantuml-previewer-react/precache-manifest.a058cd3d05dfb1a055da3e2205fd6fb6.js"
+  "/plantuml-previewer-react/precache-manifest.8f8fc47572c9ebf7e9de8c28c7dda7bd.js"
 );
 
 self.addEventListener('message', (event) => {
