@@ -37,27 +37,34 @@ const keybindingOptions = [
 ];
 
 const orientationOptions = [
-  { label: "Horizontal", value: "horizontal" },
-  { label: "Vertical", value: "vertical" }
+  { label: "Vertical", value: "vertical" },
+  { label: "Horizontal", value: "horizontal" }
 ];
 
 class App extends React.Component {
   state = {
     value: defaultValue,
-    keybindingValue: keybindingOptions[0].value,
-    orientationValue: orientationOptions[0].value,
+    keybindingValue:
+      localStorage.getItem("keybindingValue") || keybindingOptions[0].value,
+    orientationValue:
+      localStorage.getItem("orientationValue") || orientationOptions[0].value,
     graphUrl: ""
   };
 
   updateValue = v => this.setState({ value: v });
-  changeKeybindingValue = v => this.setState({ keybindingValue: v });
-  changeOrientation = v => this.setState({ orientationValue: v });
+  changeKeybindingValue = v => {
+    localStorage.setItem("keybindingValue", v);
+    this.setState({ keybindingValue: v });
+  };
+  changeOrientation = v => {
+    localStorage.setItem("orientationValue", v);
+    this.setState({ orientationValue: v });
+  };
 
   updateUrl = () => {
     const { value } = this.state;
     const encodedMarkup = plantumlEncoder.encode(value);
     const url = `http://www.plantuml.com/plantuml/img/${encodedMarkup}`;
-    console.log("url --- ", url);
     this.setState({ graphUrl: url });
   };
 
