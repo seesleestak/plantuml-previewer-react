@@ -41,9 +41,16 @@ const orientationOptions = [
   { label: "Horizontal", value: "horizontal" }
 ];
 
+const graphTypeOptions = [
+  { label: "SVG", value: "svg" },
+  { label: "PNG", value: "img" }
+];
+
 class App extends React.Component {
   state = {
     value: defaultValue,
+    graphTypeValue:
+      localStorage.getItem("graphTypeValue") || graphTypeOptions[0].value,
     keybindingValue:
       localStorage.getItem("keybindingValue") || keybindingOptions[0].value,
     orientationValue:
@@ -56,15 +63,19 @@ class App extends React.Component {
     localStorage.setItem("keybindingValue", v);
     this.setState({ keybindingValue: v });
   };
+  changeGraphType = v => {
+    localStorage.setItem("graphTypeValue", v);
+    this.setState({ graphTypeValue: v });
+  };
   changeOrientation = v => {
     localStorage.setItem("orientationValue", v);
     this.setState({ orientationValue: v });
   };
 
   updateUrl = () => {
-    const { value } = this.state;
+    const { value, graphTypeValue } = this.state;
     const encodedMarkup = plantumlEncoder.encode(value);
-    const url = `http://www.plantuml.com/plantuml/img/${encodedMarkup}`;
+    const url = `http://www.plantuml.com/plantuml/${graphTypeValue}/${encodedMarkup}`;
     this.setState({ graphUrl: url });
   };
 
@@ -73,7 +84,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { value, keybindingValue, orientationValue, graphUrl } = this.state;
+    const {
+      value,
+      keybindingValue,
+      orientationValue,
+      graphTypeValue,
+      graphUrl
+    } = this.state;
     return (
       <div className="app">
         <h1>PlantUML Previewer</h1>
@@ -105,6 +122,23 @@ class App extends React.Component {
               {orientationOptions.map(option => (
                 <option
                   key={`orientation-options-${option.value}`}
+                  value={option.value}
+                >
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </Col>
+          <Col className="option-item">
+            <label>Graph Type</label>
+            <br />
+            <select
+              value={graphTypeValue}
+              onChange={e => this.changeGraphType(e.target.value)}
+            >
+              {graphTypeOptions.map(option => (
+                <option
+                  key={`graph-type-options-${option.value}`}
                   value={option.value}
                 >
                   {option.label}
@@ -191,6 +225,11 @@ class App extends React.Component {
             </Col>
           </Row>
         )}
+        <div>
+          <a href="https://github.com/seesleestak/plantuml-previewer-react">
+            View on github
+          </a>
+        </div>
       </div>
     );
   }
