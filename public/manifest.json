@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "PlantUML Previewer",
+  "name": "PlantUML Previewer",
   "icons": [
     {
       "src": "favicon.ico",
