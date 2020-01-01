@@ -115,7 +115,7 @@ class App extends React.Component {
           <Col xs>
             <Row end="xs">
               <Col>
-                <button onClick={this.updateUrl}>Submit</button>
+                <button onClick={this.updateUrl}>Submit (Shift + Enter)</button>
               </Col>
             </Row>
           </Col>
