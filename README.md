@@ -30,3 +30,10 @@ There are a couple options to provide customization. When any option is selected
 | ---------- | ------- |
 | horizontal | `true`  |
 | vertical   | `false` |
+
+### Graph Type
+
+| type | default |
+| ---- | ------- |
+| svg  | `true`  |
+| png  | `false` |
