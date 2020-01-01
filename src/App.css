@@ -4,14 +4,19 @@
 
 .ace-con {
   border: 1px solid black;
+  margin-bottom: 20px;
 }
 
 .options-row {
   margin: 0 0 20px 0;
 }
 
+.option-item {
+  margin-right: 10px;
+}
+
 .graph-con {
   border: 1px solid black;
+  overflow: auto;
   min-height: 200px;
-  margin-bottom: 20px;
 }

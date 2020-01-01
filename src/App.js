@@ -37,19 +37,21 @@ const keybindingOptions = [
 ];
 
 const orientationOptions = [
-  { label: "Vertical", value: "vertical" },
-  { label: "Horizontal", value: "horizontal" }
+  { label: "Horizontal", value: "horizontal" },
+  { label: "Vertical", value: "vertical" }
 ];
 
 class App extends React.Component {
   state = {
     value: defaultValue,
     keybindingValue: keybindingOptions[0].value,
+    orientationValue: orientationOptions[0].value,
     graphUrl: ""
   };
 
-  updateValue = (v) => this.setState({ value: v });
-  changeKeybindingValue = (v) => this.setState({ keybindingValue: v });
+  updateValue = v => this.setState({ value: v });
+  changeKeybindingValue = v => this.setState({ keybindingValue: v });
+  changeOrientation = v => this.setState({ orientationValue: v });
 
   updateUrl = () => {
     const { value } = this.state;
@@ -59,13 +61,17 @@ class App extends React.Component {
     this.setState({ graphUrl: url });
   };
 
+  componentDidMount() {
+    this.updateUrl();
+  }
+
   render() {
-    const { value, keybindingValue, graphUrl } = this.state;
+    const { value, keybindingValue, orientationValue, graphUrl } = this.state;
     return (
       <div className="app">
         <h1>PlantUML Previewer</h1>
-        <Row className="options-row">
-          <Col xs={12} sm={2}>
+        <Row className="options-row" bottom="xs">
+          <Col className="option-item">
             <label>Keybinding</label>
             <br />
             <select
@@ -82,10 +88,13 @@ class App extends React.Component {
               ))}
             </select>
           </Col>
-          <Col xs={12} sm={2}>
+          <Col className="option-item">
             <label>Orientation</label>
             <br />
-            <select>
+            <select
+              value={orientationValue}
+              onChange={e => this.changeOrientation(e.target.value)}
+            >
               {orientationOptions.map(option => (
                 <option
                   key={`orientation-options-${option.value}`}
@@ -96,45 +105,85 @@ class App extends React.Component {
               ))}
             </select>
           </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <div className="graph-con">
-              <img alt="plantuml-graph" src={graphUrl} />
-            </div>
+          <Col xs>
+            <Row end="xs">
+              <Col>
+                <button onClick={this.updateUrl}>Submit</button>
+              </Col>
+            </Row>
           </Col>
         </Row>
-        <Row>
-          <Col xs={12}>
-            <div className="ace-con">
-              <AceEditor
-                theme="github"
-                fontSize={14}
-                onChange={v => {
-                  this.updateValue(v);
-                }}
-                keyboardHandler={keybindingValue}
-                value={value}
-                name="plantuml-input"
-                width="100%"
-                editorProps={{ $blockScrolling: true }}
-                commands={[
-                  {
-                    name: "updateUrl",
-                    bindKey: { win: "Shift-Enter", mac: "Shift-Enter" },
-                    exec: () => this.updateUrl()
-                  }
-                ]}
-                className="plantuml-input"
-              />
-            </div>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col xs={12}>
-            <button onClick={this.updateUrl}>Submit</button>
-          </Col>
-        </Row>
+        {orientationValue === "horizontal" ? (
+          <>
+            <Row>
+              <Col xs={12}>
+                <div className="ace-con">
+                  <AceEditor
+                    theme="github"
+                    fontSize={14}
+                    onChange={v => {
+                      this.updateValue(v);
+                    }}
+                    keyboardHandler={keybindingValue}
+                    value={value}
+                    name="plantuml-input"
+                    width="100%"
+                    height="425px"
+                    editorProps={{ $blockScrolling: true }}
+                    commands={[
+                      {
+                        name: "updateUrl",
+                        bindKey: { win: "Shift-Enter", mac: "Shift-Enter" },
+                        exec: () => this.updateUrl()
+                      }
+                    ]}
+                    className="plantuml-input"
+                  />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <div className="graph-con">
+                  <img alt="plantuml-graph" src={graphUrl} />
+                </div>
+              </Col>
+            </Row>
+          </>
+        ) : (
+          <Row>
+            <Col xs={12} sm={6} md={5}>
+              <div className="ace-con">
+                <AceEditor
+                  theme="github"
+                  fontSize={14}
+                  onChange={v => {
+                    this.updateValue(v);
+                  }}
+                  keyboardHandler={keybindingValue}
+                  value={value}
+                  name="plantuml-input"
+                  width="100%"
+                  height="425px"
+                  editorProps={{ $blockScrolling: true }}
+                  commands={[
+                    {
+                      name: "updateUrl",
+                      bindKey: { win: "Shift-Enter", mac: "Shift-Enter" },
+                      exec: () => this.updateUrl()
+                    }
+                  ]}
+                  className="plantuml-input"
+                />
+              </div>
+            </Col>
+            <Col xs={12} sm={6} md={7}>
+              <div className="graph-con">
+                <img alt="plantuml-graph" src={graphUrl} />
+              </div>
+            </Col>
+          </Row>
+        )}
       </div>
     );
   }
