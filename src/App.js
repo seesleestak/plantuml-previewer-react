@@ -186,7 +186,14 @@ class App extends React.Component {
             <Row>
               <Col xs={12}>
                 <div className="graph-con">
-                  <img alt="plantuml-graph" src={graphUrl} />
+                  <a
+                    alt="plantuml-graph-a"
+                    href={graphUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img alt="plantuml-graph" src={graphUrl} />
+                  </a>
                 </div>
               </Col>
             </Row>
@@ -220,7 +227,14 @@ class App extends React.Component {
             </Col>
             <Col xs={12} sm={6} md={7}>
               <div className="graph-con">
-                <img alt="plantuml-graph" src={graphUrl} />
+                <a
+                  alt="plantuml-graph-a"
+                  href={graphUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img alt="plantuml-graph" src={graphUrl} />
+                </a>
               </div>
             </Col>
           </Row>
