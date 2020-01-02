@@ -48,7 +48,7 @@ const graphTypeOptions = [
 
 class App extends React.Component {
   state = {
-    value: defaultValue,
+    value: localStorage.getItem("uml") || defaultValue,
     graphTypeValue:
       localStorage.getItem("graphTypeValue") || graphTypeOptions[0].value,
     keybindingValue:
@@ -76,6 +76,7 @@ class App extends React.Component {
     const { value, graphTypeValue } = this.state;
     const encodedMarkup = plantumlEncoder.encode(value);
     const url = `http://www.plantuml.com/plantuml/${graphTypeValue}/${encodedMarkup}`;
+    localStorage.setItem("uml", value)
     this.setState({ graphUrl: url });
   };
 
