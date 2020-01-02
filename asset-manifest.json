@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/plantuml-previewer-react/static/css/main.85563cc1.chunk.css",
-    "main.js": "/plantuml-previewer-react/static/js/main.97fb1d33.chunk.js",
-    "main.js.map": "/plantuml-previewer-react/static/js/main.97fb1d33.chunk.js.map",
+    "main.js": "/plantuml-previewer-react/static/js/main.deb90ffe.chunk.js",
+    "main.js.map": "/plantuml-previewer-react/static/js/main.deb90ffe.chunk.js.map",
     "runtime-main.js": "/plantuml-previewer-react/static/js/runtime-main.3571ff3f.js",
     "runtime-main.js.map": "/plantuml-previewer-react/static/js/runtime-main.3571ff3f.js.map",
     "static/css/2.22d6b5ec.chunk.css": "/plantuml-previewer-react/static/css/2.22d6b5ec.chunk.css",
     "static/js/2.27f9f097.chunk.js": "/plantuml-previewer-react/static/js/2.27f9f097.chunk.js",
     "static/js/2.27f9f097.chunk.js.map": "/plantuml-previewer-react/static/js/2.27f9f097.chunk.js.map",
     "index.html": "/plantuml-previewer-react/index.html",
-    "precache-manifest.36486a2cbfb8e8cdf7e46cdbc8fb255e.js": "/plantuml-previewer-react/precache-manifest.36486a2cbfb8e8cdf7e46cdbc8fb255e.js",
+    "precache-manifest.68df82335bc92a7ab764322d5ff9454b.js": "/plantuml-previewer-react/precache-manifest.68df82335bc92a7ab764322d5ff9454b.js",
     "service-worker.js": "/plantuml-previewer-react/service-worker.js",
     "static/css/2.22d6b5ec.chunk.css.map": "/plantuml-previewer-react/static/css/2.22d6b5ec.chunk.css.map",
     "static/css/main.85563cc1.chunk.css.map": "/plantuml-previewer-react/static/css/main.85563cc1.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.22d6b5ec.chunk.css",
     "static/js/2.27f9f097.chunk.js",
     "static/css/main.85563cc1.chunk.css",
-    "static/js/main.97fb1d33.chunk.js"
+    "static/js/main.deb90ffe.chunk.js"
   ]
 }
