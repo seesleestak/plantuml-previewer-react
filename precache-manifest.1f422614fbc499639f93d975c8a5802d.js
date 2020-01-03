@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "78c993e0b0b54236f105e4ec073e7cae",
+    "revision": "a2e1e953a11bef1ddccb2695bdd09f27",
     "url": "/plantuml-previewer-react/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/plantuml-previewer-react/static/css/2.22d6b5ec.chunk.css"
   },
   {
-    "revision": "e5670d7b5160138633df",
+    "revision": "f2a804c89c327c494e42",
     "url": "/plantuml-previewer-react/static/css/main.efa885e6.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/plantuml-previewer-react/static/js/2.27f9f097.chunk.js.LICENSE"
   },
   {
-    "revision": "e5670d7b5160138633df",
-    "url": "/plantuml-previewer-react/static/js/main.b85921f2.chunk.js"
+    "revision": "f2a804c89c327c494e42",
+    "url": "/plantuml-previewer-react/static/js/main.994a7929.chunk.js"
   },
   {
     "revision": "fc803def93806db57f0e",
