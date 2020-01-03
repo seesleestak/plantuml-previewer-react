@@ -240,7 +240,7 @@ class App extends React.Component {
             </Col>
           </Row>
         )}
-        <div>
+        <div className="github-link">
           <a href="https://github.com/seesleestak/plantuml-previewer-react">
             View on github
           </a>

@@ -23,4 +23,9 @@
   border: 1px solid black;
   overflow: auto;
   min-height: 200px;
+  margin-bottom: 20px;
+}
+
+.github-link {
+  margin-bottom: 20px;
 }
