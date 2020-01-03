@@ -46,29 +46,37 @@ const graphTypeOptions = [
   { label: "PNG", value: "img" }
 ];
 
+const appendNamespace = str => {
+  return `plantuml-previewer-${str}`;
+};
+const setItem = (key, value) => {
+  return localStorage.setItem(appendNamespace(key), value);
+};
+const getItem = key => {
+  return localStorage.getItem(appendNamespace(key));
+};
+
 class App extends React.Component {
   state = {
-    value: localStorage.getItem("uml") || defaultValue,
-    graphTypeValue:
-      localStorage.getItem("graphTypeValue") || graphTypeOptions[0].value,
-    keybindingValue:
-      localStorage.getItem("keybindingValue") || keybindingOptions[0].value,
+    value: getItem("uml") || defaultValue,
+    graphTypeValue: getItem("graph-type-value") || graphTypeOptions[0].value,
+    keybindingValue: getItem("keybinding-value") || keybindingOptions[0].value,
     orientationValue:
-      localStorage.getItem("orientationValue") || orientationOptions[0].value,
+      getItem("orientation-value") || orientationOptions[0].value,
     graphUrl: ""
   };
 
   updateValue = v => this.setState({ value: v });
   changeKeybindingValue = v => {
-    localStorage.setItem("keybindingValue", v);
+    setItem("keybinding-value", v);
     this.setState({ keybindingValue: v });
   };
   changeGraphType = v => {
-    localStorage.setItem("graphTypeValue", v);
+    setItem("graph-type-value", v);
     this.setState({ graphTypeValue: v });
   };
   changeOrientation = v => {
-    localStorage.setItem("orientationValue", v);
+    setItem("orientation-value", v);
     this.setState({ orientationValue: v });
   };
 
@@ -76,7 +84,7 @@ class App extends React.Component {
     const { value, graphTypeValue } = this.state;
     const encodedMarkup = plantumlEncoder.encode(value);
     const url = `http://www.plantuml.com/plantuml/${graphTypeValue}/${encodedMarkup}`;
-    localStorage.setItem("uml", value)
+    setItem("uml", value);
     this.setState({ graphUrl: url });
   };
 
