@@ -156,7 +156,7 @@ class App extends React.Component {
           <Row className="help-row">
             <Col>
               <Message info icon>
-                <Icon name="help circle" />
+                <Icon name="info circle" />
                 <Message.Content>
                   <Message.Header>
                     Need some help with the syntax?
