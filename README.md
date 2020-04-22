@@ -14,7 +14,7 @@ yarn && yarn start
 
 ## Options
 
-There are a couple options to provide customization. When any option is selected that is not the default, it is saved in localStorage so that those preferences persist.
+There are a couple options to provide customization.
 
 ### Keybindings
 
