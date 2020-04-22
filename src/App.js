@@ -203,7 +203,6 @@ class App extends React.Component {
                 </Segment>
               </Col>
             </Row>
-            <br />
             <Row>
               <Col xs={12}>
                 <Segment>
@@ -221,7 +220,7 @@ class App extends React.Component {
           </>
         ) : (
           <Row>
-            <Col xs={12} md={5}>
+            <Col md={12} lg={5}>
               <Segment className="ace-container">
                 <AceEditor
                   theme="github"
@@ -246,7 +245,7 @@ class App extends React.Component {
                 />
               </Segment>
             </Col>
-            <Col xs={12} md={7}>
+            <Col md={12} lg={7}>
               <Segment>
                 <div className="graph-con">
                   <a
