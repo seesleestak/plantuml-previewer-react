@@ -148,7 +148,7 @@ class App extends React.Component {
               />
             </Col>
             <Col xs={12} md={4} lg={3}>
-              <Button primary fluid onClick={this.updateUrl}>
+              <Button className="submit-btn" primary fluid onClick={this.updateUrl}>
                 Submit (Shift + Enter)
               </Button>
             </Col>
