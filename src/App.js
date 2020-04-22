@@ -11,34 +11,12 @@ import {
   Form,
   Select
 } from "semantic-ui-react";
+import defaultValue from "./default-uml";
 
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/keybinding-vim";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 import "./App.css";
-
-const defaultValue = `@startuml
-title Example
-
-Frontend -> Middletier: GET /posts
-
-Middletier -> Backend: GET /comments
-Backend -> Service: comments
-Service --> Backend: return(comments)
-Backend --> Middletier: return(comments)
-
-alt links not provided
-  Middletier -> Backend: GET /thumbnails
-  Backend --> Middletier: return(thumbnails)
-  Middletier -> Backend: GET /likes
-  Backend --> Middletier: return(likes)
-else  links provided
-    Middletier -> Backend: POST /links
-    Backend --> Middletier: return(links)
-end
-
-Middletier --> Frontend: return(posts)
-@enduml`;
 
 const keybindingOptions = [
   { text: "Normal", value: "normal", key: "normal" },
@@ -148,7 +126,12 @@ class App extends React.Component {
               />
             </Col>
             <Col xs={12} md={4} lg={3}>
-              <Button className="submit-btn" primary fluid onClick={this.updateUrl}>
+              <Button
+                className="submit-btn"
+                primary
+                fluid
+                onClick={this.updateUrl}
+              >
                 Submit (Shift + Enter)
               </Button>
             </Col>
