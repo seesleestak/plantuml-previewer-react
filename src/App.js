@@ -2,9 +2,11 @@ import React from "react";
 import AceEditor from "react-ace";
 import plantumlEncoder from "plantuml-encoder";
 import { Row, Col } from "react-flexbox-grid";
+import { Segment, Header, Button, Form, Select } from "semantic-ui-react";
 
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/keybinding-vim";
+import "ace-builds/src-min-noconflict/ext-language_tools";
 import "./App.css";
 
 const defaultValue = `@startuml
@@ -31,19 +33,19 @@ Middletier --> Frontend: return(posts)
 @enduml`;
 
 const keybindingOptions = [
-  { label: "Normal", value: "normal" },
-  { label: "Vim", value: "vim" },
-  { label: "Emacs", value: "emacs" }
+  { text: "Normal", value: "normal", key: "normal" },
+  { text: "Vim", value: "vim", key: "vim" },
+  { text: "Emacs", value: "emacs", key: "emacs" }
 ];
 
 const orientationOptions = [
-  { label: "Vertical", value: "vertical" },
-  { label: "Horizontal", value: "horizontal" }
+  { text: "Vertical", value: "vertical", key: "vertical" },
+  { text: "Horizontal", value: "horizontal", key: "horizontal" }
 ];
 
 const graphTypeOptions = [
-  { label: "SVG", value: "svg" },
-  { label: "PNG", value: "img" }
+  { text: "SVG", value: "svg", key: "svg" },
+  { text: "PNG", value: "img", key: "img" }
 ];
 
 const appendNamespace = str => {
@@ -102,72 +104,65 @@ class App extends React.Component {
     } = this.state;
     return (
       <div className="app">
-        <h1>PlantUML Previewer</h1>
-        <Row className="options-row" bottom="xs">
-          <Col className="option-item">
-            <label>Keybinding</label>
-            <br />
-            <select
-              value={keybindingValue}
-              onChange={e => this.changeKeybindingValue(e.target.value)}
-            >
-              {keybindingOptions.map(option => (
-                <option
-                  key={`keybinding-options-${option.value}`}
-                  value={option.value}
-                >
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </Col>
-          <Col className="option-item">
-            <label>Orientation</label>
-            <br />
-            <select
-              value={orientationValue}
-              onChange={e => this.changeOrientation(e.target.value)}
-            >
-              {orientationOptions.map(option => (
-                <option
-                  key={`orientation-options-${option.value}`}
-                  value={option.value}
-                >
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </Col>
-          <Col className="option-item">
-            <label>Graph Type</label>
-            <br />
-            <select
-              value={graphTypeValue}
-              onChange={e => this.changeGraphType(e.target.value)}
-            >
-              {graphTypeOptions.map(option => (
-                <option
-                  key={`graph-type-options-${option.value}`}
-                  value={option.value}
-                >
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </Col>
-          <Col xs>
-            <Row end="xs">
-              <Col>
-                <button onClick={this.updateUrl}>Submit (Shift + Enter)</button>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+        <Header as="h1">PlantUML Previewer</Header>
+        <Form>
+          <Row bottom="xs">
+            <Col xs={12} md={2} lg={1} className="option-item">
+              <Form.Field
+                label="Keybinding"
+                control={Select}
+                fluid
+                value={keybindingValue}
+                onChange={(e, { value }) => {
+                  this.changeKeybindingValue(value);
+                }}
+                options={keybindingOptions}
+              />
+            </Col>
+            <Col xs={12} md={3} lg={2} className="option-item">
+              <Form.Field
+                label="Orientation"
+                control={Select}
+                fluid
+                value={orientationValue}
+                onChange={(e, { value }) => this.changeOrientation(value)}
+                options={orientationOptions}
+              />
+            </Col>
+            <Col xs={12} md={2} lg={1} className="option-item">
+              <Form.Field
+                label="Graph Type"
+                control={Select}
+                fluid
+                value={graphTypeValue}
+                onChange={(e, { value }) => this.changeGraphType(value)}
+                options={graphTypeOptions}
+              />
+            </Col>
+            <Col xs={12} md={4} lg={3}>
+              <Button primary fluid onClick={this.updateUrl}>
+                Submit (Shift + Enter)
+              </Button>
+            </Col>
+          </Row>
+          <Row className="help-row">
+            <Col>
+              Need some help with the syntax? Take a look at the
+              {' '}
+              <a
+                href="https://plantuml.com/sequence-diagram"
+                alt="uml syntax documentation"
+              >
+                PlantUML Sequence Diagram documentation
+              </a>
+            </Col>
+          </Row>
+        </Form>
         {orientationValue === "horizontal" ? (
           <>
             <Row>
               <Col xs={12}>
-                <div className="ace-con">
+                <Segment className="ace-container">
                   <AceEditor
                     theme="github"
                     fontSize={14}
@@ -189,12 +184,12 @@ class App extends React.Component {
                     ]}
                     className="plantuml-input"
                   />
-                </div>
+                </Segment>
               </Col>
             </Row>
             <Row>
               <Col xs={12}>
-                <div className="graph-con">
+                <Segment>
                   <a
                     alt="plantuml-graph-a"
                     href={graphUrl}
@@ -203,14 +198,14 @@ class App extends React.Component {
                   >
                     <img alt="plantuml-graph" src={graphUrl} />
                   </a>
-                </div>
+                </Segment>
               </Col>
             </Row>
           </>
         ) : (
           <Row>
-            <Col xs={12} sm={6} md={5}>
-              <div className="ace-con">
+            <Col xs={12} md={5}>
+              <Segment className="ace-container">
                 <AceEditor
                   theme="github"
                   fontSize={14}
@@ -232,19 +227,21 @@ class App extends React.Component {
                   ]}
                   className="plantuml-input"
                 />
-              </div>
+              </Segment>
             </Col>
-            <Col xs={12} sm={6} md={7}>
-              <div className="graph-con">
-                <a
-                  alt="plantuml-graph-a"
-                  href={graphUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img alt="plantuml-graph" src={graphUrl} />
-                </a>
-              </div>
+            <Col xs={12} md={7}>
+              <Segment>
+                <div className="graph-con">
+                  <a
+                    alt="plantuml-graph-a"
+                    href={graphUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img alt="plantuml-graph" src={graphUrl} />
+                  </a>
+                </div>
+              </Segment>
             </Col>
           </Row>
         )}
