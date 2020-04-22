@@ -2,7 +2,15 @@ import React from "react";
 import AceEditor from "react-ace";
 import plantumlEncoder from "plantuml-encoder";
 import { Row, Col } from "react-flexbox-grid";
-import { Segment, Header, Button, Form, Select } from "semantic-ui-react";
+import {
+  Icon,
+  Message,
+  Segment,
+  Header,
+  Button,
+  Form,
+  Select
+} from "semantic-ui-react";
 
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/keybinding-vim";
@@ -147,14 +155,22 @@ class App extends React.Component {
           </Row>
           <Row className="help-row">
             <Col>
-              Need some help with the syntax? Take a look at the
-              {' '}
-              <a
-                href="https://plantuml.com/sequence-diagram"
-                alt="uml syntax documentation"
-              >
-                PlantUML Sequence Diagram documentation
-              </a>
+              <Message info icon>
+                <Icon name="help circle" />
+                <Message.Content>
+                  <Message.Header>
+                    Need some help with the syntax?
+                  </Message.Header>
+                  Take a look at the{" "}
+                  <a
+                    href="https://plantuml.com/sequence-diagram"
+                    alt="uml syntax documentation"
+                  >
+                    PlantUML Sequence Diagram documentation
+                  </a>
+                  .
+                </Message.Content>
+              </Message>
             </Col>
           </Row>
         </Form>
@@ -187,6 +203,7 @@ class App extends React.Component {
                 </Segment>
               </Col>
             </Row>
+            <br />
             <Row>
               <Col xs={12}>
                 <Segment>
