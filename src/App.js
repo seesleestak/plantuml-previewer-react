@@ -9,7 +9,7 @@ import {
   Header,
   Button,
   Form,
-  Select
+  Select,
 } from "semantic-ui-react";
 import defaultValue from "./default-uml";
 
@@ -21,26 +21,26 @@ import "./App.css";
 const keybindingOptions = [
   { text: "Normal", value: "normal", key: "normal" },
   { text: "Vim", value: "vim", key: "vim" },
-  { text: "Emacs", value: "emacs", key: "emacs" }
+  { text: "Emacs", value: "emacs", key: "emacs" },
 ];
 
 const orientationOptions = [
   { text: "Vertical", value: "vertical", key: "vertical" },
-  { text: "Horizontal", value: "horizontal", key: "horizontal" }
+  { text: "Horizontal", value: "horizontal", key: "horizontal" },
 ];
 
 const graphTypeOptions = [
   { text: "SVG", value: "svg", key: "svg" },
-  { text: "PNG", value: "img", key: "img" }
+  { text: "PNG", value: "img", key: "img" },
 ];
 
-const appendNamespace = str => {
+const appendNamespace = (str) => {
   return `plantuml-previewer-${str}`;
 };
 const setItem = (key, value) => {
   return localStorage.setItem(appendNamespace(key), value);
 };
-const getItem = key => {
+const getItem = (key) => {
   return localStorage.getItem(appendNamespace(key));
 };
 
@@ -51,21 +51,26 @@ class App extends React.Component {
     keybindingValue: getItem("keybinding-value") || keybindingOptions[0].value,
     orientationValue:
       getItem("orientation-value") || orientationOptions[0].value,
-    graphUrl: ""
+    graphUrl: "",
+    dismiss: getItem("dismiss") || false,
   };
 
-  updateValue = v => this.setState({ value: v });
-  changeKeybindingValue = v => {
+  updateValue = (v) => this.setState({ value: v });
+  changeKeybindingValue = (v) => {
     setItem("keybinding-value", v);
     this.setState({ keybindingValue: v });
   };
-  changeGraphType = v => {
+  changeGraphType = (v) => {
     setItem("graph-type-value", v);
     this.setState({ graphTypeValue: v });
   };
-  changeOrientation = v => {
+  changeOrientation = (v) => {
     setItem("orientation-value", v);
     this.setState({ orientationValue: v });
+  };
+  dismissHelpMessage = () => {
+    setItem("dismiss", true);
+    this.setState({ dismiss: true });
   };
 
   updateUrl = () => {
@@ -86,13 +91,14 @@ class App extends React.Component {
       keybindingValue,
       orientationValue,
       graphTypeValue,
-      graphUrl
+      graphUrl,
+      dismiss,
     } = this.state;
     return (
       <div className="app">
         <Header as="h1">PlantUML Previewer</Header>
         <Form>
-          <Row bottom="xs">
+          <Row bottom="xs" className="options-row">
             <Col xs={12} md={2} lg={1} className="option-item">
               <Form.Field
                 label="Keybinding"
@@ -136,26 +142,33 @@ class App extends React.Component {
               </Button>
             </Col>
           </Row>
-          <Row className="help-row">
-            <Col>
-              <Message info icon>
-                <Icon name="info circle" />
-                <Message.Content>
-                  <Message.Header>
-                    Need some help with the syntax?
-                  </Message.Header>
-                  Take a look at the{" "}
-                  <a
-                    href="https://plantuml.com/sequence-diagram"
-                    alt="uml syntax documentation"
-                  >
-                    PlantUML Sequence Diagram documentation
-                  </a>
-                  .
-                </Message.Content>
-              </Message>
-            </Col>
-          </Row>
+          {!dismiss && (
+            <Row>
+              <Col md={12} lg={5}>
+                <Message
+                  info
+                  icon
+                  onDismiss={this.dismissHelpMessage}
+                  className="help-row"
+                >
+                  <Icon name="info circle" />
+                  <Message.Content>
+                    <Message.Header>
+                      Need some help with the syntax?
+                    </Message.Header>
+                    Take a look at the{" "}
+                    <a
+                      href="https://plantuml.com/sequence-diagram"
+                      alt="uml syntax documentation"
+                    >
+                      PlantUML Sequence Diagram documentation
+                    </a>
+                    .
+                  </Message.Content>
+                </Message>
+              </Col>
+            </Row>
+          )}
         </Form>
         {orientationValue === "horizontal" ? (
           <>
@@ -165,7 +178,7 @@ class App extends React.Component {
                   <AceEditor
                     theme="github"
                     fontSize={14}
-                    onChange={v => {
+                    onChange={(v) => {
                       this.updateValue(v);
                     }}
                     keyboardHandler={keybindingValue}
@@ -178,8 +191,8 @@ class App extends React.Component {
                       {
                         name: "updateUrl",
                         bindKey: { win: "Shift-Enter", mac: "Shift-Enter" },
-                        exec: () => this.updateUrl()
-                      }
+                        exec: () => this.updateUrl(),
+                      },
                     ]}
                     className="plantuml-input"
                   />
@@ -208,7 +221,7 @@ class App extends React.Component {
                 <AceEditor
                   theme="github"
                   fontSize={14}
-                  onChange={v => {
+                  onChange={(v) => {
                     this.updateValue(v);
                   }}
                   keyboardHandler={keybindingValue}
@@ -221,8 +234,8 @@ class App extends React.Component {
                     {
                       name: "updateUrl",
                       bindKey: { win: "Shift-Enter", mac: "Shift-Enter" },
-                      exec: () => this.updateUrl()
-                    }
+                      exec: () => this.updateUrl(),
+                    },
                   ]}
                   className="plantuml-input"
                 />

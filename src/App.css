@@ -9,7 +9,11 @@
 }
 
 .help-row {
-  margin: 10px 0 20px 0;
+  margin-bottom: 20px !important;
+}
+
+.options-row {
+  margin-bottom: 20px;
 }
 
 .graph-con {
