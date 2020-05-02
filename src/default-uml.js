@@ -1,5 +1,4 @@
-export default `@startuml
-title Example
+export default `title Example
 
 Frontend -> Middletier: GET /posts
 
@@ -18,5 +17,4 @@ else  links provided
   Backend --> Middletier: return(links)
 end
 
-Middletier --> Frontend: return(posts)
-@enduml`;
+Middletier --> Frontend: return(posts)`;
