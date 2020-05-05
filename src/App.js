@@ -9,7 +9,7 @@ import {
   Header,
   Button,
   Form,
-  Select,
+  Select
 } from "semantic-ui-react";
 import defaultValue from "./default-uml";
 
@@ -21,26 +21,26 @@ import "./App.css";
 const keybindingOptions = [
   { text: "Normal", value: "normal", key: "normal" },
   { text: "Vim", value: "vim", key: "vim" },
-  { text: "Emacs", value: "emacs", key: "emacs" },
+  { text: "Emacs", value: "emacs", key: "emacs" }
 ];
 
 const orientationOptions = [
   { text: "Vertical", value: "vertical", key: "vertical" },
-  { text: "Horizontal", value: "horizontal", key: "horizontal" },
+  { text: "Horizontal", value: "horizontal", key: "horizontal" }
 ];
 
 const graphTypeOptions = [
   { text: "SVG", value: "svg", key: "svg" },
-  { text: "PNG", value: "img", key: "img" },
+  { text: "PNG", value: "img", key: "img" }
 ];
 
-const appendNamespace = (str) => {
+const appendNamespace = str => {
   return `plantuml-previewer-${str}`;
 };
 const setItem = (key, value) => {
   return localStorage.setItem(appendNamespace(key), value);
 };
-const getItem = (key) => {
+const getItem = key => {
   return localStorage.getItem(appendNamespace(key));
 };
 
@@ -52,19 +52,19 @@ class App extends React.Component {
     orientationValue:
       getItem("orientation-value") || orientationOptions[0].value,
     graphUrl: "",
-    dismiss: getItem("dismiss") || false,
+    dismiss: getItem("dismiss") || false
   };
 
-  updateValue = (v) => this.setState({ value: v });
-  changeKeybindingValue = (v) => {
+  updateValue = v => this.setState({ value: v });
+  changeKeybindingValue = v => {
     setItem("keybinding-value", v);
     this.setState({ keybindingValue: v });
   };
-  changeGraphType = (v) => {
+  changeGraphType = v => {
     setItem("graph-type-value", v);
     this.setState({ graphTypeValue: v });
   };
-  changeOrientation = (v) => {
+  changeOrientation = v => {
     setItem("orientation-value", v);
     this.setState({ orientationValue: v });
   };
@@ -92,7 +92,7 @@ class App extends React.Component {
       orientationValue,
       graphTypeValue,
       graphUrl,
-      dismiss,
+      dismiss
     } = this.state;
     return (
       <div className="app">
@@ -178,7 +178,7 @@ class App extends React.Component {
                   <AceEditor
                     theme="github"
                     fontSize={14}
-                    onChange={(v) => {
+                    onChange={v => {
                       this.updateValue(v);
                     }}
                     keyboardHandler={keybindingValue}
@@ -191,8 +191,8 @@ class App extends React.Component {
                       {
                         name: "updateUrl",
                         bindKey: { win: "Shift-Enter", mac: "Shift-Enter" },
-                        exec: () => this.updateUrl(),
-                      },
+                        exec: () => this.updateUrl()
+                      }
                     ]}
                     className="plantuml-input"
                   />
@@ -221,21 +221,21 @@ class App extends React.Component {
                 <AceEditor
                   theme="github"
                   fontSize={14}
-                  onChange={(v) => {
+                  onChange={v => {
                     this.updateValue(v);
                   }}
                   keyboardHandler={keybindingValue}
                   value={value}
                   name="plantuml-input"
                   width="100%"
-                  height="425px"
+                  height="80vh"
                   editorProps={{ $blockScrolling: true }}
                   commands={[
                     {
                       name: "updateUrl",
                       bindKey: { win: "Shift-Enter", mac: "Shift-Enter" },
-                      exec: () => this.updateUrl(),
-                    },
+                      exec: () => this.updateUrl()
+                    }
                   ]}
                   className="plantuml-input"
                 />

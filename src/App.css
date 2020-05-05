@@ -18,8 +18,7 @@
 
 .graph-con {
   overflow: auto;
-  min-height: 200px;
-  margin-bottom: 20px;
+  height: 77vh;
 }
 
 .github-link {
